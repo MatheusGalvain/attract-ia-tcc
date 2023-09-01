@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link para página estática ao CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+    <title>Attract IA</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <form action="/register" method="POST">
+            <h1>Cadastre-se!</h1>
+            <!-- Botão do Usuario  -->
+            <div class="box-btn">
+                <input type="text" placeholder="Usuário" name="user" required>
+            </div>
+            <!-- Botão do Nome do usuario  -->
+            <div class="box-btn">
+                <input type="text" placeholder="Nome" name="name" required>
+            </div>
+            <!-- Botão do Sobrenome  -->
+            <div class="box-btn">
+                <input type="text" placeholder="Sobrenome" name="last_name" required>
+            </div>
+            <!-- Botão da data de nascimento  -->
+            <div class="box-btn">
+                <input type="date" placeholder="Data de nascimento" name="birth_date" required min="1900-01-01"
+                    max="2099-12-31" pattern="\d{4}-\d{2}-\d{2}">
+            </div>
+            <!-- Botão do e-mail -->
+            <div class="box-btn">
+                <input type="text" placeholder="E-mail" name="email" required>
+            </div>
+            <!-- Botão da senha -->
+            <div class="box-btn">
+                <input type="password" placeholder="Senha" name="password" required>
+            </div>
+
+            {% with messages = get_flashed_messages(category_filter=["user_exist_error"]) %}
+            {% if messages %}
+            <ul class="flash-messages">
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+
+            <!-- Botão de registrar o usuario -->
+            <button type="submit" class="btn-login">Registrar</button>
+
+            <p>ou</p>
+
+            <div class="link-register">
+                <p>Já tem uma conta?
+                    <a href="{{ url_for('login') }}">Entrar</a>
+                </p>
+            </div>
+
+        </form>
+    </div>
+</body>
+
+</html>

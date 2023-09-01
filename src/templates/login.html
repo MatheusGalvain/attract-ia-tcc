@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link para página estática ao CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <title>Attract IA</title>
+    <script src="https://kit.fontawesome.com/a0954ea3b6.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <div class="leaves">
+        <div class="set">
+            <div>
+                <img src="{{ url_for('static', filename='/img/leaf_01.png') }}">
+            </div>
+            <div>
+                <img src="{{ url_for('static', filename='/img/leaf_02.png') }}">
+            </div>
+            <div>
+                <img src="{{ url_for('static', filename='/img/leaf_03.png') }}">
+            </div>
+            <div>
+                <img src="{{ url_for('static', filename='/img/leaf_01.png') }}">
+            </div>
+            <div>
+                <img src="{{ url_for('static', filename='/img/leaf_02.png') }}">
+            </div>
+            <div>
+                <img src="{{ url_for('static', filename='/img/leaf_03.png') }}">
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <form action="/login" method="POST">
+            <h1>Login</h1>
+            <div class="box-btn">
+                <!-- Etapa importante pois é obrigatório o usuario -->
+                <input type="text" placeholder="Usuário" name="username" required>
+                <i class="fa-solid fa-user"></i>
+            </div>
+
+            <div class="box-btn">
+                <!-- Etapa importante pois é obrigatório a senha -->
+                <input type="password" placeholder="Senha" name="password" required>
+                <i class="fa-solid fa-lock"></i>
+            </div>
+
+            <!-- Mensagem de erro na tela -->
+            <!-- {% if error %}
+            <p class="error-message">{{ error }}</p>
+            {% endif %} -->
+
+            <!-- Lembrar da senha -->
+            <div class="remember">
+                <label><input type="checkbox" id="check1">Lembrar-me</label>
+                <a href="{{ url_for('resetpassword') }}"> Esqueceu a senha?</a>
+            </div>
+
+            <button type="submit" class="btn-login">Entrar</button>
+
+            <div class="link-register">
+                <p>Não tem uma conta?
+                    <a href="{{ url_for('register') }}">Registrar</a>
+                </p>
+            </div>
+
+        </form>
+    </div>
+</body>
+
+</html>

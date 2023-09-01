@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link para página estática ao CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/createpicture.css') }}">
+    <title>Attract IA</title>
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Div das coisas a Esquerda -->
+        <div class="left">
+            <div class="personal-image">
+                <label class="label">
+                  <input type="file" />
+                  <figure class="personal-figure">
+                    <img class="personal-avatar" alt="avatar" src="{{ url_for('static', filename='img/Perfil.jpg') }}">
+                    <figcaption class="personal-figcaption">
+                     <img src="{{ url_for('static', filename='img/TradePerfil.png') }}">
+                    </figcaption>
+                  </figure>
+                </label>
+              </div>
+              <p class="text-box">Selecione a foto<br/>do seu quadro</p>
+        </div>
+
+        <!-- Demarcador -->
+        <div class="box"></div>
+        <div class="box linha-vertical"></div>
+
+        <!-- Div das coisas a Direita -->
+        <div class="right">
+            <div class="p1"><p>De um nome para o seu novo</p>
+            <div class="p2"><p>quadro!</p>
+            </div>
+            <div class="box-btn">
+                <input maxlength="255" type="text" placeholder="Nome do quadro" required> 
+            </div>
+            <button type= "submit" class="btn-create" maxLength="255">CRIAR</button>
+        </div>
+    </div>
+</body>
+</html>

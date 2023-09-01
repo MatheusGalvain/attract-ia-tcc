@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Playfair+Display&display=swap');
+
+*{
+	font-family: 'Montserrat', sans-serif;
+}
+
+.bemvindobg{
+	background: black url("../img/BackgroundIndex2.png") no-repeat;
+	width: 1920px; 
+	height: 1080px;
+}
+
+.bem{
+	font-family: Damonte;
+    font-size: 420px;
+    color: #A259FF;
+	margin-top: -120px;
+    margin-bottom: -20.5%;
+	margin-left: -2.5%;
+	text-shadow: #2D2A3B -25px 10px; 
+}
+
+.vindo{
+	font-family: Damonte;
+    font-size: 420px;
+    color: #A259FF;    
+	text-shadow: #2D2A3B -25px 10px; 
+	margin-bottom: -10.5%;
+}
+
+.attractia{
+	color: #FDA502;
+	font-family: Montserrat;
+	font-size: 75px;	
+	margin-right: 4%;
+}
+
+.btn {
+    width: 60%;
+    margin: 0 auto;
+    height: 50px;
+    font-size: 18px;
+    background-color: transparent;
+    outline: none;
+    margin-top: 10px;
+    border-radius: 1px;
+    border-color: #fff;
+    cursor: pointer;
+    color: #ffffff;
+    font-weight: 300;
+}
+
+
+@media (max-width: 980px) {
+ .btn{
+		width: 50%;
+	}
+ .bem{
+	 font-family: Damonte;
+    font-size: 175px;
+    color: #A259FF;
+    margin-bottom: -22.5%;
+	margin-left: -2.5%;
+	text-shadow: #2D2A3B -25px 10px; 
+	margin-top: 80px;
+}
+
+.vindo{
+	font-family: Damonte;
+    font-size: 175px;
+    color: #A259FF;    
+	text-shadow: #2D2A3B -25px 10px; 
+	margin-bottom: -10.5%;
+}
+
+.attractia{
+	color: #FDA502;
+	font-family: Montserrat;
+	font-size: 25px;	
+	margin-right: 4%;
+}
+ 
+}
+
+.imgtop{
+	width: 70px;
+	height: 70px;	
+}
+
+.textotop{
+	font-family: Montserrat;
+	font-size: 21px;
+	font-weight: 300;	
+}
+
+button{
+	border: 2px solid white;
+	background:  #2D2A3B;
+	color: white;
+	cursor: pointer;
+	margin-top: 10px;
+	padding-right: 25px;
+	padding-left: 25px;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	font-weight: bold;	
+}
+
+button:hover{
+	transition: all 0.2s;
+	background: white;
+	color: #2D2A3B;
+	font-weight: 600;
+	font-family: 'Montserrat', sans-serif;
+}
+
+.bgcor{
+	background-color: #2D2A3B;
+	color: white;
+	padding-bottom: 5px;
+	padding-top: 13px;
+}
+
+.bgcor-header{
+	background-color: #2D2A3B;
+	color: white;
+	padding-top: 2px;
+}
+
+.imgoquee{	
+	width: 50%;
+}
+
+.stylefooter{
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 200;
+
+}

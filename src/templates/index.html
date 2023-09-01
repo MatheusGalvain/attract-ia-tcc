@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Titulo do site -->
+    <title>Attract I.A</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+
+    <link href="https://fonts.cdnfonts.com/css/damonte" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a0954ea3b6.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+
+        <!--MENU-->
+        <div class="row bgcor-header">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <h5>
+                    <center>
+                    <img class="imgtop" src="{{ url_for('static', filename='img/Logo.png') }}">
+                    </center>
+                </h5>
+            </div>
+            <div align="right" class="col-md-3">
+                <a href="{{ url_for('login') }}"><button class="btn">ENTRAR</button></a>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        <!-- FIM MENU-->
+
+        <!--BEM VINDO-->
+        <div class="row">
+            <div class="col-md-12 bemvindobg">
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div align="left" class="col-md-8 bem">Bem</div>
+                    <div class="col-md-3"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div align="center" class="col-md-10 vindo">Vindo</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div align="right" class="col-md-11 attractia">ao Attract.</div>
+                </div>
+            </div>
+        </div>
+
+        <!--FIM BEM VINDO-->
+
+        <!--FIM FRASE-->
+        <div class="row bgcor">
+            <div class="col-md-12">
+                <h5 class="stylefooter">
+                    <center>Deslize para baixo para mais informações!!</center>
+                </h5>
+            </div>
+        </div>
+        <!--FIM FRASE-->
+
+        <br><br>
+
+        <!--O QUE É?-->
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <center>
+                    <img class="imgoquee" src="{{ url_for('static', filename='img/Logo.png') }}">
+                </center>
+                <br>
+            </div>
+            <div class="col-md-5">
+                <h3 align="right">
+                    O que é?
+                </h3>
+                <br>
+                <p align="justify">
+                    Bem-Vindos a nossa plataforma de gerenciamento Attract! 
+                    Aqui, acreditamos que a eficiência e o sucesso de qualquer tipo de empreendimento, 
+                    se dá a uma capacidade de organização e coordenação. Seja você um empreendedor ambicioso, 
+                    ou alguém que busca simplesmente uma organização pessoal aprimorada, a nossa plataforma 
+                    oferece as ferramentas necessárias para o seu sucesso. 
+
+                <p align="justify">
+                    Dê seu primeiro passo em direção a
+                    um gerenciamento mais qualificado e comece a trilhar seus resultados de forma excepcional,
+                    além disso, nossa plataforma tem a integração com algumas IA's, 
+                    onde elas vão buscar facilitar o seu trabalho de maneira mais organizada! 
+                </p>
+                </p>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        <!--FIM O QUE É?-->
+
+        <br>
+
+        <!--PARA QUE SERVE?-->
+        <div class="row bgcor">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <h3>
+                    Para que serve?
+                </h3>
+                <br>
+                <p align="justify">
+                    Lorem ipsum dolor sit amet, eget sapien sapien. Curabitur in metus urna. In hac habitasse platea
+                    dictumst.
+                    Phasellus eu sem sapien, sed vestibulum velit. Nam purus nibh, lacinia non faucibus et, pharetra in
+                    dolor.
+                    Sed iaculis posuere diam ut cursus. Morbi commodo sodales nisi id sodales. Proin consectetur, nisi
+                    id
+                    commodo imperdiet, metus nunc consequat lectus, id bibendum diam velit et dui. Proin massa magna,
+                    vulputate nec bibendum nec, posuere nec lacus.
+                </p>
+                <p align="justify">
+                    Lorem ipsum dolor sit amet, eget sapien sapien. Curabitur in metus urna. In hac habitasse platea
+                    dictumst.
+                    Phasellus eu sem sapien, sed vestibulum velit. Nam purus nibh, lacinia non faucibus et, pharetra in
+                    dolor.
+                    Sed iaculis posuere diam ut cursus. Morbi commodo sodales nisi id sodales. Proin consectetur, nisi
+                    id
+                    commodo imperdiet, metus nunc consequat lectus, id bibendum diam velit et dui. Proin massa magna,
+                    vulputate nec bibendum nec, posuere nec lacus.
+                </p>
+            </div>
+            <div class="col-md-5">
+                <div class="col-md-1"></div>
+            </div>
+        </div>
+        <!--FIM PARA QUE SERVE?-->
+
+        <br><br>
+
+        <!--DIFERENCIAL-->
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <center>
+                    <img class="imgoquee" src="{{ url_for('static', filename='img/Logo.png') }}">
+                </center>
+                <br>
+            </div>
+            <div class="col-md-5">
+                <h3 align="right">
+                    Diferencial
+                </h3>
+                <br>
+                <p align="justify">
+                    Lorem ipsum dolor sit amet, eget sapien sapien. Curabitur in metus urna. In hac habitasse platea
+                    dictumst.
+                    Phasellus eu sem sapien, sed vestibulum velit. Nam purus nibh, lacinia non faucibus et, pharetra in
+                    dolor.
+                    Sed iaculis posuere diam ut cursus. Morbi commodo sodales nisi id sodales. Proin consectetur, nisi
+                    id
+                    commodo imperdiet, metus nunc consequat lectus, id bibendum diam velit et dui. Proin massa magna,
+                    vulputate nec bibendum nec, posuere nec lacus.
+                <p align="justify">
+                    Lorem ipsum dolor sit amet, eget sapien sapien. Curabitur in metus urna. In hac habitasse platea
+                    dictumst.
+                    Phasellus eu sem sapien, sed vestibulum velit. Nam purus nibh, lacinia non faucibus et, pharetra in
+                    dolor.
+                    Sed iaculis posuere diam ut cursus. Morbi commodo sodales nisi id sodales. Proin consectetur, nisi
+                    id
+                    commodo imperdiet, metus nunc consequat lectus, id bibendum diam velit et dui. Proin massa magna,
+                    vulputate nec bibendum nec, posuere nec lacus.
+                </p>
+                </p>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        <!--FIM DIFERENCIAL-->
+
+        <br>
+
+        <!--FIM FRASE-->
+        <div class="row bgcor">
+            <div class="col-md-12">
+                <h5 class="stylefooter">
+                    <center>© Todos os Direitos Reservados a @MatheusGalvain</center>
+                </h5>
+            </div>
+        </div>
+        <!--FIM FRASE-->
+
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    </div>
+</body>
+
+</html>
