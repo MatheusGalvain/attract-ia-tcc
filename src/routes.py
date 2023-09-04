@@ -7,7 +7,7 @@ def configure_routes(app):
     # Rota da index
     @app.route('/')
     def home():
-        return render_template('createpicture.html')
+        return render_template('profile.html')
 
     # Rota do login
     @app.route('/login', methods=['GET', 'POST'])
