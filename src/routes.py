@@ -7,7 +7,7 @@ def configure_routes(app):
     # Rota da index
     @app.route('/')
     def home():
-        return render_template('profile.html')
+        return render_template('editprofile.html')
 
     # Rota do login
     @app.route('/login', methods=['GET', 'POST'])
@@ -87,4 +87,13 @@ def configure_routes(app):
         else:
             return render_template('login.html', error="Credenciais inválidas")
 
+    # Rota do Perfil
+    @app.route('/perfil')
+    def profile():
+        return render_template('profile.html')
+
+    # Rota do Perfil
+    @app.route('/editperfil')
+    def editprofile():
+        return render_template('editprofile.html')
     return app
