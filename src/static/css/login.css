@@ -161,6 +161,10 @@ input[type="checkbox"]:checked::before {
     font-weight: 500;
 }
 
+.flash-messages{
+    color: #ffc350;
+}
+
 .wrapper .link-register{
     font-size: 14.5px;
     text-align: center;

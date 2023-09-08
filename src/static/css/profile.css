@@ -103,6 +103,11 @@ li{
     margin-bottom: 70px;
 }
 
+.dots {
+    color: #fff; /* Cor desejada */
+    margin-left: 15px; /* Espaçamento desejado */
+}
+
 .label{
     display: contents;
     margin-top: -50px;
@@ -204,7 +209,7 @@ li{
 }
 
 .wrapper .btn-edit-fav,
-.wrapper .btn-edit-perfil {
+.wrapper .btn-edit-perfil{
     flex: 1; 
     margin: 5px; 
     height: 40px;
@@ -216,4 +221,43 @@ li{
     cursor: pointer;
     color: #ffffff;
     font-weight: 300;
+}
+
+.btns a{
+    flex: 1; 
+    margin: 5px; 
+    height: 40px;
+    font-size: 18px;
+    background-color: #A259FF;
+    outline: none;
+    border-radius: 15px;
+    border-color: transparent;
+    cursor: pointer;
+    color: #ffffff;
+    font-weight: 300;
+}
+
+a.btn-link {
+    text-decoration: none; 
+    color: inherit; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    padding: 10px 20px; 
+    border: 1px solid transparent; 
+    border-radius: 15px; 
+    background-color: #A259FF; 
+    color: #ffffff; 
+    font-size: 18px; 
+    font-weight: 300; 
+    cursor: pointer; 
+    transition: background-color 0.3s, color 0.3s; 
+}
+
+.buttons{
+    margin-top: 15%;
+}
+
+.btn-link{
+    margin-bottom: 5%;
 }

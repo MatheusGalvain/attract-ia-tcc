@@ -151,14 +151,12 @@ li{
     font-weight: 500;
 }
 
-.favorites{
-    margin-top: 2%;
-}
 
 .btns {
     display: flex;
     justify-content: space-between; 
     align-items: center;
+    margin-bottom: 2%;
 }
 
 .wrapper .btn-edit-fav,

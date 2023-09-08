@@ -49,17 +49,23 @@
                 <input type="password" placeholder="Senha" name="password" required>
                 <i class="fa-solid fa-lock"></i>
             </div>
-
-            <!-- Mensagem de erro na tela -->
-            <!-- {% if error %}
-            <p class="error-message">{{ error }}</p>
-            {% endif %} -->
+            {% with messages = get_flashed_messages(category_filter=["user_exist"]) %}
+            {% if messages %}
+            <ul class="flash-messages">
+                {% for message in messages %}
+                {{ message }}
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
 
             <!-- Lembrar da senha -->
             <div class="remember">
                 <label><input type="checkbox" id="check1">Lembrar-me</label>
                 <a href="{{ url_for('resetpassword') }}"> Esqueceu a senha?</a>
             </div>
+
+            
 
             <button type="submit" class="btn-login">Entrar</button>
 
