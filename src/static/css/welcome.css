@@ -15,7 +15,7 @@ body{
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url('/static/img/Background.png') no-repeat;
+    background: url('/static/img/BackgroundIndexLimpo.png') no-repeat;
     background-size: cover;
     background-position: center;
 }
@@ -142,10 +142,10 @@ body{
     margin: 0 auto;
     height: 40px;
     font-size: 18px;
-    background-color: transparent;
+    background-color: #A259FF;
     outline: none;
     border-radius: 15px;
-    border-color: #fff;
+    border: 0;
     cursor: pointer;
     color: #ffffff;
     font-weight: 300;
@@ -178,9 +178,6 @@ body{
 }
 
 button:hover{
-	transition: all 0.01s;
-	background: white;
-	color: #2D2A3B;
-	font-weight: 500;
-	font-family: 'Montserrat', sans-serif;
+	transition: all 0.001s;
+  font-weight: 500;
 }

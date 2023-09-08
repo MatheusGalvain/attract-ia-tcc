@@ -20,16 +20,22 @@ def configure_routes(app):
             # fazendo um select no usuario e na senha
             with mysql.connector.connect(**db_config) as db_connection:
                 db_cursor = db_connection.cursor(dictionary=True)
-                db_cursor.execute("SELECT id, user FROM users WHERE user = %s AND password = %s", (username, password))
+                db_cursor.execute("SELECT id, user, name, last_name FROM users WHERE user = %s AND password = %s",
+                                  (username, password))
                 user = db_cursor.fetchone()
                 db_cursor.close()
 
             # Se o login for bem-sucedido, crie uma sessão
             if user:
                 session['user_id'] = user['id']
-                session['username'] = user['user']  # Armazena o nome de usuário na sessão
+                session['username'] = user['user']
+                session['name'] = user['name']
+                session['last_name'] = user['last_name']
+
                 return redirect(url_for('welcome'))
+
             else:
+                flash('Usuário ou senha incorreta', 'user_exist')
                 return redirect(url_for('login'))
 
         return render_template('login.html')
@@ -75,11 +81,11 @@ def configure_routes(app):
         return render_template('resetpassword.html')
 
     # Rota do primeiro quadro
-    @app.route('/welcome')
+    @app.route('/welcome', methods=['GET', 'POST'])
     def welcome():
-        user_id = session.get('user_id')
-        username = session.get('username')  # Obtenha o nome de usuário da sessão
-        # definir os dados do usuario pra no futuro para outros usos da sessão
+        user_id = session['user_id']
+        username = session['username']
+        username = username.capitalize()
 
         if user_id:
             usuario = {'username': username}  # Crie um dicionário com o nome de usuário
@@ -88,9 +94,19 @@ def configure_routes(app):
             return render_template('login.html', error="Credenciais inválidas")
 
     # Rota do Perfil
-    @app.route('/perfil')
+    @app.route('/perfil', methods=['GET', 'POST'])
     def profile():
-        return render_template('profile.html')
+        user_id = session['user_id']
+        username = session['username']
+        name = session.get('name')
+        name = name.capitalize()  # Primeira letra maiscula do nome
+        last_name = session.get('last_name')  # Ultimo Nome
+        last_name = last_name.capitalize()  # Primeira letra maiscula do sobrenome
+
+        if user_id:
+            return render_template('profile.html', username=username, name=name, last_name=last_name)
+        else:
+            return render_template('login.html', error="Credenciais inválidas")
 
     # Rota do Perfil
     @app.route('/editperfil')
