@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link para página estática ao CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/editfavorites.css') }}">
+    <title>Attract IA</title>
+</head>
+
+<body>
+
+     <!-- Aqui fica o header -->
+     <header>
+        <div class="logo">
+            <img class="imgtop" src="{{ url_for('static', filename='img/Logo.png') }}">
+        </div>
+        <div class="fav-logo">
+            <img class="imgfav" src="{{ url_for('static', filename='img/Perfil.jpg') }}">
+            <a>.</a>
+            <img class="imgfav" src="{{ url_for('static', filename='img/Perfil.jpg') }}">
+            <a>.</a>
+            <img class="imgfav" src="{{ url_for('static', filename='img/Perfil.jpg') }}">
+        </div>
+        <ul>
+            <li class="textoHeader">Quadros</li>
+            <li class="textoHeader">Configurações</li>
+            <li class="textoHeader">Perfil</li>
+            <li><img class="imgperfiltop" src="{{ url_for('static', filename='img/Perfil.jpg') }}"></li>
+        </ul>
+    </header>
+
+    <div class="wrapper">
+        <div class="box-grl">
+            <div class="box">
+                <div class="img"><img class="imgquadro" src="{{ url_for('static', filename='img/Perfil.jpg') }}"></div>
+                <div class="namebox"><h2> Quadro 1 </h2></div>
+                <div class="arrow"></div><p> Seta</p></div>
+            
+            <div class="box">
+                <div class="img"><img class="imgquadro" src="{{ url_for('static', filename='img/Perfil.jpg') }}"></div>
+                <div class="namebox"><h2> Quadro 2 </h2></div>
+                <div class="arrow"></div><p> Seta</p></div>
+            
+            <div class="box">
+                <div class="img"><img class="imgquadro" src="{{ url_for('static', filename='img/Perfil.jpg') }}"></div>
+                <div class="namebox"><h2> Quadro 3 </h2></div>
+                <div class="arrow"></div><p> Seta</p></div>
+        </div> 
+            <div class="btns">
+                <a href="{{ url_for('profile') }}" class="btn-link">Salvar</a>
+            </div>
+        </div>
+</body>
