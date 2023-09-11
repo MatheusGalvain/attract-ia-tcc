@@ -109,7 +109,38 @@ def configure_routes(app):
             return render_template('login.html', error="Credenciais inválidas")
 
     # Rota do Perfil
-    @app.route('/editperfil')
+    @app.route('/editperfil', methods=['GET', 'POST'])
     def editprofile():
-        return render_template('editprofile.html')
+        user_id = session['user_id']
+        if request.method == 'GET':
+            with mysql.connector.connect(**db_config) as db_connection:
+                db_cursor = db_connection.cursor(dictionary=True)
+                db_cursor.execute("SELECT user, name, email, birth_date, password, last_name FROM users WHERE id = %s",
+                                  (user_id,))
+                user = db_cursor.fetchone()
+                db_cursor.close()
+
+            if user is None:
+                flash('User not found in the database', 'user_not_found')
+                return redirect(url_for('profile'))
+
+        if request.method == 'POST':
+            name = session['name']
+            last_name = request.form.get('last_name')
+            email = request.form.get('email')
+            birth_date = request.form.get('birth_date')
+            password = request.form.get('password')
+
+            with mysql.connector.connect(**db_config) as db_connection:
+                db_cursor = db_connection.cursor(dictionary=True)
+                db_cursor.execute("UPDATE users SET name = %s, last_name = %s, email = %s, birth_date = %s, password = %s "
+                                  "WHERE id = %s", (name, last_name, email, birth_date, password, user_id))
+                db_cursor.close()
+
+            return render_template('editperfil.html', name=user['name'], last_name=user['last_name'],
+                                   email=user['email'], birth_date=user['birth_date'], password=user['password'])
+
+    @app.route('/editfavorites')
+    def editfavorites():
+        return render_template('editfavorites.html')
     return app
