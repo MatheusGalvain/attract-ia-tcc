@@ -1,6 +1,7 @@
 from flask import render_template, request, redirect, url_for, session, flash
 from config import db_config
-import mysql.connector
+
+cursor = db_config.cursor(dictionary=True)
 
 
 def configure_routes(app):
@@ -14,16 +15,13 @@ def configure_routes(app):
     def login():
         if request.method == 'POST':
             username = request.form.get('username')
-            password = request.form.get('password')
+            password = request.form.get('password')  # Aqui acontece um with, onde ele conecta com o banco pra
+            # verificar se o usuario é cadastrado
 
-            # Aqui acontece um with, onde ele conecta com o banco pra verificar se o usuario é cadastrado,
             # fazendo um select no usuario e na senha
-            with mysql.connector.connect(**db_config) as db_connection:
-                db_cursor = db_connection.cursor(dictionary=True)
-                db_cursor.execute("SELECT id, user, name, last_name FROM users WHERE user = %s AND password = %s",
-                                  (username, password))
-                user = db_cursor.fetchone()
-                db_cursor.close()
+            cursor.execute("SELECT id, user, name, last_name FROM users WHERE user = %s AND password = %s",
+                           (username, password))
+            user = cursor.fetchone()
 
             # Se o login for bem-sucedido, crie uma sessão
             if user:
@@ -51,28 +49,32 @@ def configure_routes(app):
             birth_date = request.form.get('birth_date')
             password = request.form.get('password')
 
-            # Conexão com o banco de dados
-            with mysql.connector.connect(**db_config) as db_connection:
-                db_cursor = db_connection.cursor()
+            # Verifica se o usuário já existe
+            cursor.execute("SELECT id FROM users WHERE user = %s", (user,))
+            existing_user = cursor.fetchone()
 
-                # Verifica se o usuário já existe
-                db_cursor.execute("SELECT id FROM users WHERE user = %s", (user,))
-                existing_user = db_cursor.fetchone()
+            if existing_user:
+                # Plugin de mensagens de erro
+                flash('Usuário já existente.', 'user_exist_error')
+                return redirect(url_for('register'))
+            # Insere o novo usuário no banco de dados
+            else:
+                cursor.execute("INSERT INTO users (user, password, email, birth_date, last_name, name) \
+                                VALUES (%s, %s, %s, %s, %s, %s)",
+                               (user, password, email, birth_date, last_name, name))
+                db_config.commit()
+                cursor.execute("SELECT * FROM users WHERE user = %s", (user, ))
+                users = cursor.fetchone()
+                # cursor.execute("SELECT * FROM has_seen_first_card WHERE user_id = %s", (users['id']))
+                # has = cursor.fetchone()
+                cursor.execute("INSERT INTO has_seen_first_card (seen_card, user_id) \
+                                VALUES (%s, %s)",
+                               (False, users['id'], ))
+                db_config.commit()
 
-                if existing_user:
-                    # Plugin de mensagens de erro
-                    flash('Usuário já existente.', 'user_exist_error')
-                    return redirect(url_for('register'))
-                # Insere o novo usuário no banco de dados
-                else:
-                    db_cursor.execute("INSERT INTO users (user, password, email, birth_date, last_name, name) \
-                                      VALUES (%s, %s, %s, %s, %s, %s)",
-                                      (user, password, email, birth_date, last_name, name))
-                    db_connection.commit()
-
-                db_cursor.close()
-                # Redireciona para a página de login após o registro bem-sucedido
-                return redirect(url_for('login'))
+            cursor.close()
+            # Redireciona para a página de login após o registro bem-sucedido
+            return redirect(url_for('login'))
         return render_template('register.html')
 
     # Rota da Alteração de senha
@@ -87,14 +89,23 @@ def configure_routes(app):
         username = session['username']
         username = username.capitalize()
 
+        cursor.execute("SELECT * FROM has_seen_first_card WHERE user_id = %s", (user_id,))
+        has_seen_first_card = cursor.fetchone()
+
         if user_id:
-            usuario = {'username': username}  # Crie um dicionário com o nome de usuário
-            return render_template('welcome.html', usuario=usuario)
+            if has_seen_first_card['seen_card']:
+                return redirect(url_for('profile'))
+            else:
+                usuario = {'username': username}  # Crie um dicionário com o nome de usuário
+                cursor.execute("UPDATE has_seen_first_card SET seen_card = True WHERE user_id = %s",
+                               (user_id, ))
+                db_config.commit()
+                return render_template('welcome.html', usuario=usuario)
         else:
             return render_template('login.html', error="Credenciais inválidas")
 
     # Rota do Perfil
-    @app.route('/perfil', methods=['GET', 'POST'])
+    @app.route('/profile', methods=['GET', 'POST'])
     def profile():
         user_id = session['user_id']
         username = session['username']
@@ -109,36 +120,28 @@ def configure_routes(app):
             return render_template('login.html', error="Credenciais inválidas")
 
     # Rota do Perfil
-    @app.route('/editperfil', methods=['GET', 'POST'])
+    @app.route('/editprofile', methods=['GET', 'POST'])
     def editprofile():
         user_id = session['user_id']
-        if request.method == 'GET':
-            with mysql.connector.connect(**db_config) as db_connection:
-                db_cursor = db_connection.cursor(dictionary=True)
-                db_cursor.execute("SELECT user, name, email, birth_date, password, last_name FROM users WHERE id = %s",
-                                  (user_id,))
-                user = db_cursor.fetchone()
-                db_cursor.close()
 
-            if user is None:
-                flash('User not found in the database', 'user_not_found')
-                return redirect(url_for('profile'))
+        if request.method == 'GET':
+            cursor.execute("SELECT * FROM users WHERE id = %s", (user_id,))
+            user = cursor.fetchone()
+            return render_template('editprofile.html', user=user, user_id=user_id)
 
         if request.method == 'POST':
-            name = session['name']
-            last_name = request.form.get('last_name')
-            email = request.form.get('email')
-            birth_date = request.form.get('birth_date')
-            password = request.form.get('password')
+            name = request.form['name']
+            last_name = request.form['last_name']
+            email = request.form['email']
+            birth_date = request.form['birth_date']
+            password = request.form['password']
 
-            with mysql.connector.connect(**db_config) as db_connection:
-                db_cursor = db_connection.cursor(dictionary=True)
-                db_cursor.execute("UPDATE users SET name = %s, last_name = %s, email = %s, birth_date = %s, password = %s "
-                                  "WHERE id = %s", (name, last_name, email, birth_date, password, user_id))
-                db_cursor.close()
+            cursor.execute("UPDATE users SET name = %s, email = %s, birth_date = %s, last_name = %s, \
+                            password = %s WHERE id = %s",
+                           (name, email, birth_date, last_name, password, user_id))
+            db_config.commit()
 
-            return render_template('editperfil.html', name=user['name'], last_name=user['last_name'],
-                                   email=user['email'], birth_date=user['birth_date'], password=user['password'])
+            return redirect(url_for('editprofile'))
 
     @app.route('/editfavorites')
     def editfavorites():

@@ -40,35 +40,34 @@
         </div>
 
         <div class="center">
-            <form method="POST" action="/editperfil">
+            <form method="POST" action="/editprofile">
                 <div class="username">
                     <h1>Editar foto</h1>
                 </div>
                 <div class="favorites">
                     <!-- Botão do nome  -->
                     <div class="box-btn">
-                        <input value='{{ name }}' type="text" placeholder="Nome" name="name" required>
+                        <input value='{{ user.name }}' type="text" placeholder="Nome" name="name" required>
                     </div>
                     <!-- Botão do sobrenome  -->
                     <div class="box-btn">
-                        <input value='{{ last_name }}' type="text" placeholder="Sobrenome" name="last_name" required>
+                        <input value='{{ user.last_name }}' type="text" placeholder="Sobrenome" name="last_name" required>
                     </div>
                     <!-- Botão da data de nascimento  -->
                     <div class="box-btn">
-                        <input value='{{ birth_date }}' type="date" placeholder="Data de nascimento" name="birth_date"
+                        <input value='{{ user.birth_date }}' type="date" placeholder="Data de nascimento" name="birth_date"
                             required min="1900-01-01" max="2099-12-31" pattern="\d{4}-\d{2}-\d{2}">
                     </div>
                     <!-- Botão do e-mail -->
                     <div class="box-btn">
-                        <input value='{{ email }}' type="email" placeholder="E-mail" name="email" required>
+                        <input value='{{ user.email }}' type="email" placeholder="E-mail" name="email" required>
                     </div>
                     <!-- Botão da senha -->
                     <div class="box-btn">
-                        <input value='{{ password}}' type="password" placeholder="Senha" name="password" required>
+                        <input value='{{ user.password}}' type="password" placeholder="Senha" name="password" required>
                     </div>
                     <div class="btns">
                         <button type="submit">Salvar</button>
-                        <a href="{{ url_for('editprofile') }}" class="btn-link">Salvar</a>
                     </div>
                     <div class="btns">
                         <a href="{{ url_for('profile') }}" class="btn-link">Voltar</a>
