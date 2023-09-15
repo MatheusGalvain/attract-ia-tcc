@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+</head>
+<body>
+  
+
+<header>
+    <nav>		
+      <img class="imgtop" src="{{ url_for('static', filename='img/Logo.png') }}">        
+        <div class="mobile-menu">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+        </div>
+      
+      <ul class="nav-list">	
+          <div>
+          <a href=""><img class="imgtopfav" src="{{ url_for('static', filename='img/Perfil.jpg') }}"></a>
+          <a href=""><img class="imgtopfav" src="{{ url_for('static', filename='img/Perfil.jpg') }}"></a>
+          <a href=""><img class="imgtopfav" src="{{ url_for('static', filename='img/Perfil.jpg') }}"></a>
+          </div>
+        <li id="borda"><a href="#">Quadros</a></li>
+        <li id="borda"><a href="#">Perfil</a></li>
+        <li id="borda"><a href="#">Sair</a></li> 
+        <li><img class="imgtopperfil" src="{{ url_for('static', filename='img/Perfil.jpg') }}"></li>
+      </ul>
+    </nav>
+    
+  </header>
+  
+  <main></main>
+  <script src="{{ url_for('static', filename='js/mobile-navbar.js') }}"></script>
+
+</body>
+</html>
