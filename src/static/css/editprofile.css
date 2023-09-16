@@ -20,75 +20,6 @@ body{
     background-position: center;
 }
 
-
-header{	
-	height: 10vh;
-	display: flex;
-	justify-content: space-between;
-	background-color: #2D293B;
-	box-shadow: 0 0 1rem #A259FF;
-	opacity: 0.9;
-}
-
-ul{
-	display: flex;
-	margin: 23px;
-	padding-top: 15px;
-	margin-right: 4rem;
-}
-
-li{
-	color: white;
-	list-style-type: none;
-	cursor: pointer;
-	margin-left: 4rem;
-	margin-bottom: 2px;
-	font-size: 18px;
-    align-items: center;
-}
-
-.fav-logo{
-    display: flex;
-    margin-left: 0px;
-    align-items: center;
-}
-.fav-logo a{
-    color: #fff;
-    margin-left: 15px;
-}
-
-.imgfav{
-    display: flex;
-	margin-left: 1.5rem;
-	width: 50px;
-    height: 50px;
-    margin-top: 5px;
-    border-radius: 50px;
-}
-
-.textoHeader:hover{
-	border-bottom: 3px solid white;	
-	transition: all 0.001s;
-    font-weight: 500;
-}
-
-.logo{
-	width: 42px;
-	height: 42px;
-	margin: 10px;
-}
-
-.imgtop{
-	width: 180%;
-	margin-left: 4rem;
-}
-
-.imgperfiltop{
-	width: 72px;
-	margin-top: -25px;
-	border-radius: 50px;	
-}
-
 .wrapper {
     width: 600px;
     height: 700px;
@@ -134,7 +65,7 @@ li{
   
 
   .center {
-    display: flex;
+    padding: 0 100px 0 100px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -156,7 +87,7 @@ li{
     display: flex;
     justify-content: space-between; 
     align-items: center;
-    margin-bottom: 2%;
+    margin-bottom: 5%;
 }
 
 .wrapper .btn-edit-fav,
@@ -176,6 +107,7 @@ li{
 }
 
 a.btn-link {
+    margin: 0;
     text-decoration: none; 
     color: inherit; 
     display: flex; 
@@ -228,4 +160,23 @@ input[type="date"]::-webkit-inner-spin-button,
 input[type="date"]::-webkit-calendar-picker-indicator {
     display: none;
     -webkit-appearance: none;
+}
+
+.wrapper .btn-login {
+    width: 100%;
+    margin: 0 auto;
+    height: 40px;
+    font-size: 18px;
+    background-color: #A259FF;
+    outline: none;
+    border-radius: 15px;
+    border-color: transparent;
+    cursor: pointer;
+    color: #ffffff;
+    font-weight: 300;
+}
+
+.btn-login:hover{
+    transition: all 0.001s;
+    font-weight: 500;
 }

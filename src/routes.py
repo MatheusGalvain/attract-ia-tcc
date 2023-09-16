@@ -1,5 +1,6 @@
 from flask import render_template, request, redirect, url_for, session, flash
 from config import db_config
+# import _mysql_connector
 
 cursor = db_config.cursor(dictionary=True)
 
