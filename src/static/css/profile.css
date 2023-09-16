@@ -170,6 +170,7 @@ body{
 }
 
 a.btn-link {
+    width: 438px;
     text-decoration: none; 
     color: inherit; 
     display: flex; 
