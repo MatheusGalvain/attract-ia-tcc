@@ -1,6 +1,8 @@
-from flask import render_template, request, redirect, url_for, session, flash
+from flask import render_template, request, redirect, url_for, flash, session
 from config import db_config
 # import _mysql_connector
+from werkzeug.utils import secure_filename
+import os
 
 cursor = db_config.cursor(dictionary=True)
 
@@ -120,7 +122,7 @@ def configure_routes(app):
         else:
             return render_template('login.html', error="Credenciais inválidas")
 
-    # Rota do Perfil
+    # Rota de Editar o Perfil
     @app.route('/editprofile', methods=['GET', 'POST'])
     def editprofile():
         user_id = session['user_id']
@@ -136,6 +138,16 @@ def configure_routes(app):
             email = request.form['email']
             birth_date = request.form['birth_date']
             password = request.form['password']
+
+            # Processar o upload da imagem
+            if 'profile_image' in request.files:
+                profile_image = request.files['profile_image']
+                if profile_image.filename != '':
+                    # Salvar a imagem em algum diretório, por exemplo, 'static/uploads'
+                    image_path = os.path.join(app.config['UPLOAD_FOLDER'], 'profiles', secure_filename(profile_image.filename))
+                    profile_image.save(image_path)
+                    # Armazenar o caminho da imagem na sessão do Flask
+                    session['profile_image'] = image_path
 
             cursor.execute("UPDATE users SET name = %s, email = %s, birth_date = %s, last_name = %s, \
                             password = %s WHERE id = %s",
