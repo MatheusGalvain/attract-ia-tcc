@@ -114,11 +114,8 @@ def configure_routes(app):
         username = session['username']
         name = session.get('name')
         name = name.capitalize()  # Primeira letra maiscula do nome
-        last_name = session.get('last_name')  # Ultimo Nome
-        last_name = last_name.capitalize()  # Primeira letra maiscula do sobrenome
-
         if user_id:
-            return render_template('profile.html', username=username, name=name, last_name=last_name)
+            return render_template('profile.html', username=username, name=name)
         else:
             return render_template('login.html', error="Credenciais inválidas")
 
@@ -159,4 +156,19 @@ def configure_routes(app):
     @app.route('/editfavorites')
     def editfavorites():
         return render_template('editfavorites.html')
+
+    # Limpa a sessão, deslogando o usuário
+    @app.route('/logout')
+    def logout():
+        session.clear()
+        flash('Você foi desconectado com sucesso.', 'logout')
+        return redirect(url_for('login'))
+
+    @app.route('/boards')
+    def boards():
+        user_id = session['user_id']
+        print(user_id)
+        cursor.execute("SELECT * FROM boards WHERE user_id = %s", (user_id,))
+        boards = cursor.fetchall()
+        return render_template('boards.html', boards=boards)
     return app
