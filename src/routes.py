@@ -32,7 +32,6 @@ def configure_routes(app):
                 session['username'] = user['user']
                 session['name'] = user['name']
                 session['last_name'] = user['last_name']
-
                 return redirect(url_for('welcome'))
 
             else:
