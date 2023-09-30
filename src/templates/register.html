@@ -19,11 +19,12 @@
             </div>
             <!-- Botão do Nome do usuario  -->
             <div class="box-btn">
-                <input type="text" placeholder="Nome" name="name" required>
+                <input type="text" maxlength="20" placeholder="Nome" name="name" required>
+                <span class="error-message" id="name-error"></span>
             </div>
             <!-- Botão do Sobrenome  -->
             <div class="box-btn">
-                <input type="text" placeholder="Sobrenome" name="last_name" required>
+                <input type="text" maxlength="20" placeholder="Sobrenome" name="last_name" required>
             </div>
             <!-- Botão da data de nascimento  -->
             <div class="box-btn">
@@ -51,9 +52,7 @@
 
             <!-- Botão de registrar o usuario -->
             <button type="submit" class="btn-login">Registrar</button>
-
             <p>ou</p>
-
             <div class="link-register">
                 <p>Já tem uma conta?
                     <a href="{{ url_for('login') }}">Entrar</a>

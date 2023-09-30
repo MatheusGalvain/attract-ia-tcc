@@ -4,11 +4,14 @@ from config import SECRET_KEY
 from flask_session import Session
 from routes import configure_routes
 
+
 app = Flask(__name__)
 # Definições da sessao do usuario através do flask session
 # Ele basicamente cria uma sessao unica pro usuario
 app.config['SESSION_PERMANENT'] = False
 app.config['SESSION_TYPE'] = 'filesystem'
+app.config['UPLOAD_FOLDER'] = 'static/uploads'
+
 Session(app)
 app.secret_key = SECRET_KEY
 

@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Playfair+Display&display=swap');
+
+/* CSS Rules for font 
+font-family: 'Montserrat', sans-serif;
+font-family: 'Playfair Display', serif; */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body{
+    
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url('/static/img/BackgroundPerfil.png') no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.boards{
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 15px 0px 15px;
+}
+
+.boards-container{
+  align-items: center;
+  display: flex;
+  position: absolute;
+  top: 43%;
+}
+
+.top-name{
+  margin-top: 4%
+}
+
+.top-name h1{
+  color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 60px;
+}
+
+.top-name h2{
+  color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 200;
+  margin-top: 3%;
+}
+
+.container{
+  height: 150%;
+  min-height: 150%;
+  flex-direction: row;
+  justify-content: center;
+  display: flex;
+}
+
+.card-image {
+  text-align: center;
+  display: flex;
+  align-items: center;
+
+}
+
+.personal-figure {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
+}
+.card-personal-avatar {
+  width: inherit;
+  height: inherit;
+  box-sizing: border-box;
+  border-radius: 100%;
+  border: 2px solid transparent;
+  box-shadow: 0 0 1rem #A259FF;
+  transition: all ease-in-out .3s;
+}
+
+.personal-figure2{
+  position: relative;
+}
+
+.border{
+  font-size: 80px;
+  padding: 50%;
+  border: 2px solid white;
+  border-radius: 100%;
+}
+
+.personal-figcaption {
+  position: absolute;
+  top: 0px;
+  width: inherit;
+  height: inherit;
+  border-radius: 100%;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0);
+  transition: all ease-in-out .1s;
+}
+.personal-figcaption:hover {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, .5);
+}
+.personal-figcaption > img {
+  margin-top: 60px;
+  width: 50px;
+  height: 50px;
+}
+
+  .effect1{
+    display: inline-block;
+    height: 146px;
+    width: 146px;
+    border-radius: 190px;
+    border: 2px solid #ffffff;
+    text-align: center;
+    text-decoration: none;
+    color: #FFF;
+    margin: 0px 15px 0px 15px;
+    transition: all .2s;
+    box-shadow: 0 0 1rem #A259FF;
+  }
+
+  .effect1:hover{
+    background-color: #2D2A3B;
+  }
+
+  .label {
+    line-height: 140px;
+    font-size: 120px;
+    font-weight: 100;
+    font-style: normal;
+    transition: all .1s;
+  }
+
+  h5{
+    margin-top: 15px;
+    font-weight: 400;
+    font-size: 20px;
+  }
+
+  p{
+    margin-top: 7px;
+    font-weight: 400;
+    font-size: 20px;
+    color: white;
+  }
