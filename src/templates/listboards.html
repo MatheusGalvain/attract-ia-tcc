@@ -5,27 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Link para página estática ao CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/boards.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/listboards.css') }}">
     <script src="https://kit.fontawesome.com/a0954ea3b6.js" crossorigin="anonymous"></script>
     <title>Attract IA</title>
 </head>
 
 <body>
     {% include "header.html" %}
-    <div class="container ">
-        <div class="top-name">
-            <h1>Olá, Matheus!</h1>
-            <h2>Continue produzindo de onde parou:</h2>
-        </div>
-
-        <!-- Container contendo os boards -->
-        <div class="boards-container">
-            <!-- Botão de criar -->
-            <a href="{{ url_for('createboard') }}" class="effect1">
-                <i class="label">+</i>
+    <div class="container">
+        <div id="quadros" class="new">
+            <div class="backboards">
+            <a href="{{ url_for('boards') }}" class="effect1">
+                <i class="label"><</i>
                 <h5>Criar</h5>
             </a>
-
+        </div>
             {% for board in boards %}
             <div class="boards">
                 <div class="card-image">
@@ -40,11 +34,8 @@
             </div>
             {% endfor %}
 
-            <a href="{{ url_for('all_boards') }}" class="effect1">
-                <i class="label">=</i>
-                <h5>Mais Quadros</h5>
-            </a>
         </div>
     </div>
+ 
 </body>
 </html>

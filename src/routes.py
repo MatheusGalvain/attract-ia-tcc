@@ -152,6 +152,7 @@ def configure_routes(app):
 
             return redirect(url_for('editprofile'))
 
+    # Rota de Editar os favoritos
     @app.route('/editfavorites')
     def editfavorites():
         return render_template('editfavorites.html')
@@ -163,11 +164,43 @@ def configure_routes(app):
         flash('Você foi desconectado com sucesso.', 'logout')
         return redirect(url_for('login'))
 
+    # Rota Home dos quadros
     @app.route('/boards')
     def boards():
         user_id = session['user_id']
-        print(user_id)
-        cursor.execute("SELECT * FROM boards WHERE user_id = %s", (user_id,))
+        cursor.execute("SELECT * FROM boards WHERE user_id = %s ORDER BY id DESC LIMIT 5", (user_id,))
         boards = cursor.fetchall()
         return render_template('boards.html', boards=boards)
+
+    # Faz um filtro de apenas 15 caracteres para aparecer na lista dos quadros
+    @app.template_filter('limit_length')
+    def limit_length(s, max_length):
+        if len(s) <= max_length:
+            return s
+        else:
+            return s[:max_length] + '...'
+
+    # Rota que ira trazer a lista dos quadros completa
+    @app.route('/boards/all')
+    def all_boards():
+        user_id = session['user_id']
+        cursor.execute("SELECT * FROM boards WHERE user_id = %s", (user_id,))
+        boards = cursor.fetchall()
+        return render_template('listboards.html', boards=boards)
+
+    # Rota que ira criar um quadro novo
+    @app.route('/createboard', methods=['GET', 'POST'])
+    def createboard():
+        if request.method == 'POST':
+            name = request.form.get('name')
+            user_id = session['user_id']
+
+            # Insira o novo quadro no banco de dados
+            cursor.execute("INSERT INTO boards (name, user_id) VALUES (%s, %s)",
+                           (name, user_id))
+            db_config.commit()
+
+            # Redirecione para alguma página de sucesso ou para a lista de quadros
+            return redirect(url_for('boards'))
+        return render_template('createboard.html')
     return app

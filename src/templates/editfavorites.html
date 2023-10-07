@@ -10,26 +10,7 @@
 </head>
 
 <body>
-
-     <!-- Aqui fica o header -->
-     <header>
-        <div class="logo">
-            <img class="imgtop" src="{{ url_for('static', filename='img/Logo.png') }}">
-        </div>
-        <div class="fav-logo">
-            <img class="imgfav" src="{{ url_for('static', filename='img/Perfil.jpg') }}">
-            <a>.</a>
-            <img class="imgfav" src="{{ url_for('static', filename='img/Perfil.jpg') }}">
-            <a>.</a>
-            <img class="imgfav" src="{{ url_for('static', filename='img/Perfil.jpg') }}">
-        </div>
-        <ul>
-            <li class="textoHeader">Quadros</li>
-            <li class="textoHeader">Configurações</li>
-            <li class="textoHeader">Perfil</li>
-            <li><img class="imgperfiltop" src="{{ url_for('static', filename='img/Perfil.jpg') }}"></li>
-        </ul>
-    </header>
+    {% include "header.html" %}
 
     <div class="wrapper">
         <div class="box-grl">
