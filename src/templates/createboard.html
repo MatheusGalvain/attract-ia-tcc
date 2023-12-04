@@ -1,8 +1,12 @@
 {% include "head.html" %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/createpicture.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/createboard.css') }}">
 
 <body>
+    <form action="/createboard" method="POST">
     <div class="wrapper">
+        
+        <div class="wrapper-box">
+           
         <!-- Div das coisas a Esquerda -->
         <div class="left">
             <div class="personal-image">
@@ -16,23 +20,38 @@
                   </figure>
                 </label>
               </div>
+
               <p class="text-box">Selecione a foto<br/>do seu quadro</p>
         </div>
-
+    
         <!-- Demarcador -->
         <div class="box"></div>
         <div class="box linha-vertical"></div>
 
+        
         <!-- Div das coisas a Direita -->
         <div class="right">
-            <div class="p1"><p>De um nome para o seu novo</p>
-            <div class="p2"><p>quadro!</p>
-            </div>
+            <div class="text-p"><p>Escolha um nome para o seu quadro!</p></div>
             <div class="box-btn">
-                <input maxlength="255" type="text" placeholder="Nome do quadro" required> 
+                <input type="text" id="board_name" name="name" maxlength="255" type="text" placeholder="Nome do quadro" required> 
             </div>
-            <button type= "submit" class="btn-create" maxLength="255">CRIAR</button>
+            <div class="text-p"><p>E agora, um método para o seu quadro!</p></div>
+            <div class="box-ctr">
+                    <div class="box-btn-create">          
+                        <p>+</p>    
+                    </div>
+                    <div class="box-methods">
+                        <p>Kanban</p> 
+                    </div>
+                    <div class="box-methods">
+                        <p>Padrão</p> 
+                    </div>
+            </div>
+            <button type= "submit" class="btn-create">CRIAR</button>
         </div>
+        <span class="close">&times;</span>
     </div>
+</form>
+</div>
 </body>
 </html>

@@ -27,7 +27,7 @@
     }
 
     .imgtopperfil {
-        width: 8vh;
+        width: 7vh;
         border-radius: 50px;
         text-decoration: none;
     }
@@ -36,9 +36,8 @@
         display: flex;
         font-family: Arial;
         justify-content: space-around;
-        background-color: #2D293B;
-        box-shadow: 0 0 1rem #A259FF;
-        opacity: 0.9;
+        background-color: #292047;
+        /* box-shadow: 0 0 1rem #A259FF; */
     }
 
     .nav-list {
@@ -46,6 +45,10 @@
         display: flex;
         align-items: center;
         text-decoration: none;
+    }
+
+    .fav{
+        margin-left: -190px;
     }
 
     .nav-list li {

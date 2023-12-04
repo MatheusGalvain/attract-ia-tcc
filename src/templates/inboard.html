@@ -1,0 +1,368 @@
+{% include "head.html" %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/inboard.css') }}">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+<body>
+    {% include "header.html" %}
+    <div class="container">
+        <div class="icons-left">
+            <a href="{{ url_for('createboard') }}" class="effect1"><i class="fa-solid fa-house"
+                    style="color: #ffffff;"></i></a>
+            <a href="{{ url_for('createboard') }}" class="effect1"><i class="fa-solid fa-trash"
+                    style="color: #ffffff;"></i></a>
+        </div>
+        <div class="inboard">
+            <!-- Parte superior do white board -->
+            <div class="top">
+                <!-- Imagem do quadro -->
+                <div class="img">
+                    <div class="boards">
+                        <div class="card-image">
+                            <label class="card-label">
+                                <figure class="personal-figure">
+                                    <img class="card-personal-avatar" alt="avatar"
+                                        src="{{ url_for('static', filename='img/Perfil2.png') }}">
+                                </figure>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nome do quadro -->
+                <div class="name">
+                    <input id="input-board-id" type="hidden" value="{{ board.id }}"></input>
+                    <p> {{board.name}} </p>
+                </div>
+
+                <!-- Filtros do quadro -->
+                <div class="filters right">
+                    <div class="filter progress">
+                        <p>0</p>
+                        <a>Em Aberto</a>
+                    </div>
+                    <div class="filter doit">
+                        <p>0</p>
+                        <a>Fazendo</a>
+                    </div>
+                    <div class="filter total">
+                        <p>0</p>
+                        <a>Concluído</a>
+                    </div>
+                </div>
+                <!-- Fim da Parte superior do white board -->
+
+            </div>
+            <!-- Parte Inferior do white board -->
+            <div class="under">
+                <div class="card-list">
+                    <button class='btn-more' id="openModalBtn">Adicionar Atividade</button>
+                    <div id="cardContainer" class="card-tasks-container">
+                        {% for card in cards %}
+                        {% if card.status is none %}
+                        <div data-id="{{ card.id }}" id="{{ card.id }}" class="card-task">
+                            <div class="btn-remove"><a
+                                    href="{{ url_for('deletecard', board_id=board.id, card_id=card.id) }}"><i
+                                        class="fa-solid fa-trash" style="color: #fafafa;"></i></i></a></div>
+                            <div class="card-title"><a>{{ card.name }}</a></div>
+                            <div class="box-progress-wrapper">
+                                <p class="box-progress-percentage">{{ card.progress }}</p>
+                                <div class="box-progress-bar">
+                                    <span class="box-progress"></span>
+                                </div>
+                            </div>
+                            <div class="card-persons">
+                                <img class="card-img" alt="avatar"
+                                    src="{{ url_for('static', filename='img/Perfil2.png') }}">
+                                <img class="card-img" alt="avatar"
+                                    src="{{ url_for('static', filename='img/Perfil2.png') }}">
+                                <img class="card-img" alt="avatar"
+                                    src="{{ url_for('static', filename='img/Perfil2.png') }}">
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="boards-containers">
+                    <div class="board">
+                        <div class="board-top">
+                            <div class="numero">2</div>
+                            <div class="titulo">Em Aberto</div>
+                        </div>
+
+                        <!-- HTML DO POPUP DE ADICIONAR CARD -->
+                        <div id="modal" class="modal">
+                            <div class="modal-content">
+                                <span class="close" id="closeModalBtn">&times;</span>
+                                <h2>Título da nova atividade:</h2>
+                                <form method="POST" action="/savecard/{{ board.id }}">
+                                    <div class="display">
+                                        <label for="cardName">Escolha um nome para a sua nova atividade</label>
+                                        <div class="login-box">
+                                            <input placeholder="Nome" class="user-box" type="text" id="cardName"
+                                                name="cardName" required>
+                                        </div>
+                                    </div>
+                                    <div class="button-container">
+                                        <button class="btn-login" type="submit" id="saveBtn">Salvar</button>
+                                        <button class="btn-login" type="button" id="cancelBtn">Cancelar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- HTML DO POPUP DO CARD -->
+                        <div id="modal" class="modal">
+                            <div class="modal-content">
+                                <span class="close" id="closeModalBtn">&times;</span>
+                                <h2>Título do novo quadro:</h2>
+                                <form method="POST" action="/savecard/{{ board.id }}">
+                                    <div class="display">
+                                        <label for="cardName">Escolha um nome para o seu novo quadro</label>
+                                        <div class="login-box">
+                                            <input placeholder="Nome" class="user-box" type="text" id="cardName"
+                                                name="cardName" required>
+                                        </div>
+                                    </div>
+                                    <div class="button-container">
+                                        <button class="btn-login" type="button" id="cancelBtn">Cancelar</button>
+                                        <button class="btn-login" type="submit" id="saveBtn">Salvar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div id="a-fazer" class="card-tasks-container">
+                            {% for card in cards %}
+                            {% if card.status == 'a-fazer' %}
+                            <div onclick="openModelToDo('{{card.id}}')" id="openModalToDoBtn{{card.id}}">
+                                <div data-id="{{ card.id }}" id="{{ card.id }}" class="card-task">
+                                    <div class="btn-remove"><a
+                                            href="{{ url_for('deletecard', board_id=board.id, card_id=card.id) }}"><i
+                                                class="fa-solid fa-trash" style="color: #fafafa;"></i></a></div>
+                                    <div class="card-title"><a>{{ card.name }}</a></div>
+                                    <div class="box-progress-wrapper">
+                                        <p class="box-progress-percentage">{{ card.progress }}</p>
+                                        <div class="box-progress-bar">
+                                            <span class="box-progress"></span>
+                                        </div>
+                                    </div>
+                                    <div class="card-persons">
+                                        <img class="card-img" alt="avatar"
+                                            src="{{ url_for('static', filename='img/Perfil2.png') }}">
+                                        <img class="card-img" alt="avatar"
+                                            src="{{ url_for('static', filename='img/Perfil2.png') }}">
+                                        <img class="card-img" alt="avatar"
+                                            src="{{ url_for('static', filename='img/Perfil2.png') }}">
+                                    </div>
+                                </div>
+                            </div>
+                            {% include "cardToDo.html" %}
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+
+                    </div>
+                    <div class="board">
+                        <div class="board-top">
+                            <div class="numero">3</div>
+                            <div class="titulo">Fazendo</div>
+                        </div>
+                        <div id="fazendo" class="card-tasks-container">
+                            {% for card in cards %}
+                            {% if card.status == 'fazendo' %}
+                            <div onclick="openModelInProgress('{{card.id}}')" id="openModalInProgressBtn{{card.id}}">
+                                <div data-id="{{ card.id }}" id="{{ card.id }}" class="card-task">
+                                    <div class="btn-remove"><a
+                                            href="{{ url_for('deletecard', board_id=board.id, card_id=card.id) }}"><i
+                                                class="fa-solid fa-trash" style="color: #fafafa;"></i></a></div>
+                                    <div class="card-title"><a>{{ card.name }}</a></div>
+                                    <div class="box-progress-wrapper">
+                                        <p class="box-progress-percentage">{{ card.progress }}</p>
+                                        <div class="box-progress-bar">
+                                            <span class="box-progress"></span>
+                                        </div>
+                                    </div>
+                                    <div class="card-persons">
+                                        <img class="card-img" alt="avatar"
+                                            src="{{ url_for('static', filename='img/Perfil2.png') }}">
+                                        <img class="card-img" alt="avatar"
+                                            src="{{ url_for('static', filename='img/Perfil2.png') }}">
+                                        <img class="card-img" alt="avatar"
+                                            src="{{ url_for('static', filename='img/Perfil2.png') }}">
+                                    </div>
+                                </div>
+                            </div>
+                            {% include "cardInProgress.html" %}
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="board">
+                        <div class="board-top">
+                            <div class="numero">4</div>
+                            <div class="titulo">Concluído</div>
+                        </div>
+                        <div id="concluido" class="card-tasks-container">
+                            {% for card in cards %}
+                            {% if card.status == 'concluido' %}
+                            <div onclick="openModelComplete('{{card.id}}')" id="openModalCompleteBtn{{card.id}}">
+                                <div data-id="{{ card.id }}" id="{{ card.id }}" class="card-task">
+                                    <div class="btn-remove"><a
+                                            href="{{ url_for('deletecard', board_id=board.id, card_id=card.id) }}"><i
+                                                class="fa-solid fa-trash" style="color: #fafafa;"></i></a></div>
+                                    <div class="card-title"><a>{{ card.name }}</a></div>
+                                    <div class="box-progress-wrapper">
+                                        <p class="box-progress-percentage">{{ card.progress }}</p>
+                                        <div class="box-progress-bar">
+                                            <span class="box-progress"></span>
+                                        </div>
+                                    </div>
+                                    <div class="card-persons">
+                                        <img class="card-img" alt="avatar"
+                                            src="{{ url_for('static', filename='img/Perfil2.png') }}">
+                                        <img class="card-img" alt="avatar"
+                                            src="{{ url_for('static', filename='img/Perfil2.png') }}">
+                                        <img class="card-img" alt="avatar"
+                                            src="{{ url_for('static', filename='img/Perfil2.png') }}">
+                                    </div>
+                                </div>
+                            </div>
+                            {% include "cardComplete.html" %}
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <div id="myModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <p>Tem certeza de que deseja remover este card?</p>
+                        <button class="btn-confirm">Confirmar</button>
+                    </div>
+                </div>
+
+
+                <!-- Fim da Parte inferior do white board -->
+            </div>
+        </div>
+
+        <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/scriptToDo.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/scriptInProgress.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/scriptComplete.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/scriptSubCard.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/scriptSubActivites.js') }}"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="https://kit.fontawesome.com/a0954ea3b6.js" crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(function () {
+                
+                $("#addCard").click(function () {
+                    var newCard = `
+                        
+                    `;
+                   
+                    $("#cardContainer").append(newCard);
+
+                
+                    $(".card-task").draggable({
+                        revert: "invalid",
+                        cursor: "move",
+                        helper: "clone",
+                        start: function (event, ui) {
+                            ui.helper.css('z-index', '100');
+                        }
+                    });
+                });
+
+            
+                $(".card-task").draggable({
+                    revert: "invalid",
+                    cursor: "move",
+                    helper: "clone",
+                    start: function (event, ui) {
+                        ui.helper.css('z-index', '100');
+                    }
+                });
+
+               
+                $(".card-tasks-container").droppable({
+                    accept: ".card-task",
+                    drop: function (event, ui) {
+                        $(this).append(ui.draggable);
+                    }
+                });
+
+                
+                $(".board").droppable({
+                    accept: ".card-task",
+                    drop: function (event, ui) {
+                        $(this).find('.card-tasks-container').append(ui.draggable);
+                        updateCardCount(); 
+                    }
+                });
+
+                function updateCardCount() {
+                    $('.boards-containers .board').each(function () {
+                        var cardCount = $(this).find('.card-task').length;
+                        $(this).find('.numero').text(cardCount);
+                    });
+                }
+
+               
+                updateCardCount();
+
+               
+                $("#addCard").click(function () {
+                    
+                    updateCardCount();
+                });
+
+               
+                $(".board").droppable({
+                    accept: ".card-task",
+                    drop: function (event, ui) {
+                        var containerType = $(this).find('.card-tasks-container').attr('id');
+                        var cardId = ui.helper.data('id');
+                        var board_id = document.getElementById('input-board-id').value;
+                        if (containerType === "a-fazer") {
+                            window.location.href = '/movecard/a-fazer/' + cardId + '/' + board_id;
+                        } else if (containerType === "fazendo") {
+                            window.location.href = '/movecard/fazendo/' + cardId + '/' + board_id;
+                        } else if (containerType === "concluido") {
+                            window.location.href = '/movecard/concluido/' + cardId + '/' + board_id;
+                        }
+
+                        $(this).find('.card-tasks-container').append(ui.draggable);
+                        updateCardCount();
+                    }
+                });
+                window.addEventListener("load", function () {
+                    var loader = document.getElementById("loader");
+                    var content = document.getElementById("content");
+                    loader.style.display = "none";
+                    content.style.display = "block";
+                });
+
+
+                $(document).on('click', '.btn-remove', function (e) {
+                    e.stopPropagation();
+                    var cardToRemove = $(this).parent(); 
+                    var confirmDelete = window.confirm("Tem certeza de que deseja remover este card?"); 
+
+                    if (confirmDelete) {
+                        cardToRemove.remove(); 
+                        updateCardCount(); 
+                    }
+                });
+            });
+
+        </script>
+
+</body>
+
+</html>

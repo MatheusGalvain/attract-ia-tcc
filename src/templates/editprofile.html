@@ -1,30 +1,30 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+{% include "head.html" %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/editprofile.css') }}">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Link para página estática ao CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/editprofile.css') }}">
-    <title>Attract IA</title>
-</head>
 
 <body>
     <!-- Aqui fica o header -->
     {% include "header.html" %}
 
     <div class="wrapper">
-        <form method="POST" action="/editprofile" enctype="multipart/form-data">
-            <!-- Seus outros campos de edição de perfil -->
+        <!-- <form method="POST" action="/editprofile" enctype="multipart/form-data">
+            
             <div class="form-group">
                 <label for="profile_image">Escolher uma nova foto de perfil:</label>
                 <input type="file" name="profile_image" id="profile_image" accept="image/*">
             </div>
             <button type="submit" class="btn btn-primary">Salvar</button>
-        </form> 
+        </form>  -->
 
         <div class="center">
             <form method="POST" action="/editprofile">
+                <div class="personal-image">
+                    <label class="label">
+                        <figure class="personal-figure">
+                            <img class="personal-avatar" alt="avatar" src="{{ url_for('static', filename='img/Perfil.jpg') }}">
+                        </figure>
+                    </label>
+                </div>
                 <div class="username">
                     <h1>Editar foto</h1>
                 </div>

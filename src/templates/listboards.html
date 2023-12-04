@@ -1,24 +1,17 @@
-
 {% include "head.html" %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/boards.css') }}">
-<script src="https://unpkg.com/feather-icons"></script>
- 
+<link rel="stylesheet" href="{{ url_for('static', filename='css/listboards.css') }}">
+
+
 <body>
     {% include "header.html" %}
-    <div class="container ">
-        <div class="top-name">
-            <h1>Olá, {{ user_name }}!</h1>
-            <h2>Continue produzindo de onde parou:</h2>
-        </div>
-
-        <!-- Container contendo os boards -->
-        <div class="boards-container">
-            <!-- Botão de criar -->
-            <a href="{{ url_for('createboard') }}" class="effect1">
-                <i class="label">+</i>
+    <div class="container">
+        <div id="quadros" class="new">
+            <div class="backboards">
+            <a href="{{ url_for('boards') }}" class="effect1">
+                <i class="label"><</i>
                 <h5>Criar</h5>
             </a>
-
+        </div>
             {% for board in boards %}
             <div onclick="redirectBoard('{{ board.id }}')" class="boards">
                 <div class="card-image">
@@ -33,13 +26,9 @@
             </div>
             {% endfor %}
 
-            <a href="{{ url_for('all_boards') }}" class="effect1">
-                <i class="label">=</i>
-                <h5>Mais Quadros</h5>
-            </a>
         </div>
     </div>
-
+    
     <script>
         function redirectBoard(id){
             window.location.href = "/boards/inside/" + id;

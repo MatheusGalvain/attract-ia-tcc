@@ -1,0 +1,195 @@
+<div id="modalToDo{{ card.id }}" class="modal">
+    <input type="hidden" id="cardId" value="{{ card.id }}" />
+    <div class="content-model">
+        <div class="boardwhite">
+            <span class="close" id="closeModalToDoBtn{{card.id}}"
+                onclick="closeButtonToDo('{{card.id}}')">&times;</span>
+            <h2> {{ card.name }} </h2>
+            <div class="displaybox">
+                <div class="box-description">
+                    <input placeholder="Descrição" class="box-user" type="text" id="cardDescription{{card.id}}" value="{% if card.description is not none %}{{ card.description }}{% endif %}" name="cardName" required />
+                </div>
+                <div class="displaybox-btns">
+                    <div class="displaybox-btns-geral">
+                        <input placeholder="Digite uma subatividade" name="response-user-new" id="response-user-new"
+                            class="box-user-1" type="text">
+                    </div>
+                    <div class="displaybox-btns-geral">
+                        <input placeholder="Digite uma subatividade para IA" name="response-user" id="response-user"
+                            class="box-user-2" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="subtask">
+                <div class="btns-boards-container">
+                    <div class="text">
+                        <h2>Subtatividades:</h2>
+                    </div>
+                    <div class="btns">
+                        <button class="btn-board" type="button" onclick="getNewSubActiviteFlask()">Adicionar
+                            Subatividade</button>
+                        <button class="btn-board" type="submit" onclick="chamarRotaFlask()" id="saveBtn">Gerar
+                            IA</button>
+                        <div class="loading-gif" id="loadingGif{{ card.id }}" style="display: none;">
+                            <img class="gif-symbol" src="{{ url_for('static', filename='img/loading.gif') }}"
+                                alt="Carregando..." />
+                        </div>
+                    </div>
+                </div>
+                <div class="box-btns-subtaks">
+                    {% for sub_activite in sub_activites %}
+                    <div class="box-btn">
+                        <input type="text" value="{{sub_activite.title}}"
+                            id="openModalSubActiviteBtn{{sub_activite.id}}"
+                            onclick="openModelSubActivite('{{sub_activite.id}}');">
+                        <span class="error-message" id="name-error"></span>
+                    </div>
+                    {% include "subActivites.html" %}
+                    {% endfor %}
+                </div>
+                <div class="btns">
+                    <button class="btn-board-2" type="button"
+                        onclick="editDescriptionCard('{{card.id}}', '{{board.id}}')">Salvar</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+    const inputs = document.querySelectorAll('.box-user-1, .box-user-2');
+
+    inputs.forEach(input => {
+        input.addEventListener('input', function () {
+            const btns = document.querySelectorAll('.btn-board');
+            if (input.classList.contains('box-user-1')) {
+                if (input.value.trim().toLowerCase().includes('a')) {
+                    btns[0].removeAttribute('disabled');
+                    btns[0].style.backgroundColor = '#A259FF';
+                } else {
+                    btns[0].setAttribute('disabled', 'disabled');
+                    btns[0].style.backgroundColor = '#808080';
+                }
+            } else if (input.classList.contains('box-user-2')) {
+                if (input.value.trim().toLowerCase().includes('a')) {
+                    btns[1].removeAttribute('disabled');
+                    btns[1].style.backgroundColor = '#A259FF';
+                } else {
+                    btns[1].setAttribute('disabled', 'disabled');
+                    btns[1].style.backgroundColor = '#808080';
+                }
+            }
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const btns = document.querySelectorAll('.btn-board');
+        btns.forEach(btn => {
+            btn.setAttribute('disabled', 'disabled');
+            btn.style.backgroundColor = '#808080';
+        });
+    });
+
+    function chamarRotaFlask() {
+        // Adicione o código para exibir o indicador de carregamento
+        const loadingGif = document.getElementById('loadingGif{{ card.id }}');
+        const cardId = document.getElementById('cardId').value
+        loadingGif.style.display = 'block';
+
+        var response_user = document.getElementById('response-user').value;
+        $.ajax({
+            url: '/sub-activites/chat-gpt/' + response_user + '/' + cardId,
+            type: 'POST',
+            contentType: 'application/json',
+            success: function (response) {
+                // Remova o indicador de carregamento e exiba o sinal de confirmação
+                loadingGif.style.display = 'none';
+                const okSign = document.createElement('div');
+                okSign.innerText = 'OK';
+                okSign.style.color = 'green';
+                document.getElementById('modalToDo{{ card.id }}').appendChild(okSign);
+
+                atualizarPopup(response);
+                console.log(response);
+            },
+            error: function (error) {
+                console.error('Erro ao chamar a rota do Flask:', error);
+                // Em caso de erro, remova o indicador de carregamento
+                loadingGif.style.display = 'none';
+            }
+        });
+    }
+
+    function getNewSubActiviteFlask() {
+        // Adicione o código para exibir o indicador de carregamento
+        const loadingGif = document.getElementById('loadingGif{{ card.id }}');
+        const cardId = document.getElementById('cardId').value
+        loadingGif.style.display = 'block';
+
+        var response_user = document.getElementById('response-user-new').value;
+        $.ajax({
+            url: '/save-new-sub-activites/' + response_user + '/' + cardId,
+            type: 'POST',
+            contentType: 'application/json',
+            success: function (response) {
+                // Remova o indicador de carregamento e exiba o sinal de confirmação
+                loadingGif.style.display = 'none';
+                const okSign = document.createElement('div');
+                okSign.innerText = 'OK';
+                okSign.style.color = 'green';
+                document.getElementById('modalToDo{{ card.id }}').appendChild(okSign);
+
+                atualizarPopup(response);
+                console.log(response);
+            },
+            error: function (error) {
+                console.error('Erro ao chamar a rota do Flask:', error);
+                // Em caso de erro, remova o indicador de carregamento
+                loadingGif.style.display = 'none';
+            }
+        });
+    }
+
+    function atualizarPopup(titulos) {
+        var boxBtnsSubtasks = document.querySelector('.box-btns-subtaks');
+
+        // Limpe o conteúdo existente, se houver
+        boxBtnsSubtasks.innerHTML = '';
+        titulos.forEach(function (titulo) {
+            var boxBtn = document.createElement('div');
+            boxBtn.classList.add('box-btn');
+
+            var inputTexto = document.createElement('input');
+            inputTexto.type = 'text';
+            inputTexto.maxLength = 20;
+            inputTexto.placeholder = 'Nome';
+            inputTexto.name = 'name';
+            inputTexto.required = true;
+
+            var spanErro = document.createElement('span');
+            spanErro.classList.add('error-message');
+            spanErro.id = 'name-error';
+
+            // Adicione o título como valor padrão para cada caixa de texto
+            inputTexto.value = titulo.title;
+            inputTexto.id = 'openModalSubActiviteBtn' + titulo.id
+
+            inputTexto.onclick = function () {
+                openModelSubActivite(titulo.id);
+            };
+
+            boxBtn.appendChild(inputTexto);
+            boxBtn.appendChild(spanErro);
+
+            boxBtnsSubtasks.appendChild(boxBtn);
+        });
+    }
+
+    function editDescriptionCard(card_id, board_id) {
+        var card_description = document.getElementById('cardDescription' + card_id).value;
+        var url = "{{ url_for('savedescriptioncard', board_id=board.id, card_id=card.id) }}?card_description=" + card_description;
+        window.location.href = url;
+    }
+</script>

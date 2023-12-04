@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Link para página estática ao CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/welcome.css') }}">
-    <title>Attract IA</title>
+{% include "head.html" %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/welcome.css') }}">
 
-</head>
 <body>
+    <form action="/createboard" method="POST">
     <div class="wrapper">
         <!-- Div das coisas a Esquerda -->
         <div class="left">
@@ -35,16 +29,17 @@
         
         <!-- Div das coisas a Direita -->
         <div class="right">
-            <h1>SEJA BEM-VINDO AO ATTRACT</h1>
+            <h1>SEJA BEM-VINDO AO DOIAX</h1>
             <h2>VAMOS COMEÇAR?</h2>
-            <div class="text-p"><p>De um nome para o seu primeiro quadro!</p>
+            <div class="text-p"><p>Dê um nome para o seu primeiro quadro!</p>
             </div>
             <div class="box-btn">
-                <input maxlength="255" type="text" placeholder="Nome do quadro" required> 
+                <input maxlength="255" type="text" id="name" name="name" placeholder="Nome do quadro" required> 
             </div>
             <button type= "submit" class="btn-create" maxLength="255">CRIAR</button>
         </div>
-
+    </form>
     </div>
+
 </body>
 </html>

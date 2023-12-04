@@ -1,19 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
-</head>
-<body>
-  
+{% include "head.html" %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
 
 <header>
     <nav>		
-      <img class="imgtop" src="{{ url_for('static', filename='img/Logo.png') }}"> 
+      <img class="imgtop" src="{{ url_for('static', filename='img/NewLogo.png') }}"> 
       <ul class="nav-list">   
-        <div>
+        <div class="fav">
           <a href=""><img class="imgtopfav" src="{{ url_for('static', filename='img/Perfil.jpg') }}"></a>
           <a href=""><img class="imgtopfav" src="{{ url_for('static', filename='img/Perfil.jpg') }}"></a>
           <a href=""><img class="imgtopfav" src="{{ url_for('static', filename='img/Perfil.jpg') }}"></a>

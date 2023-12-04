@@ -15,7 +15,7 @@ body{
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url('/static/img/BackgroundPerfil.png') no-repeat;
+    background-color: #462E68;
     background-size: cover;
     background-position: center;
 }
@@ -30,7 +30,7 @@ body{
     color: #fff;
     border-radius: 10px;
     margin: 0 auto; 
-    margin-top: 70px;
+    margin-top: 65px;
     margin-bottom: 70px;
 }
 
