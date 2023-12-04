@@ -1,0 +1,24 @@
+<div id="modalSubCard{{ subcard.id }}" class="modal">
+    <div class="content-model">
+        <div class="boardwhite">
+            <span class="close" id="closeModalmodalSubCardBtn{{card.id}}"
+                onclick="closeButtonSubCard('{{subcard.id}}')">&times;</span>
+            <h2> {{ subcard.name }} </h2>
+            <div class="displaybox">
+                <div class="box-description">
+                    <input placeholder="Descrição" class="box-user" type="text" id="subCardName{{subcard.id}}"
+                        name="subCardName" required>
+                </div>
+                <div class="displaybox-btns">
+                    <div class="displaybox-btns-geral">
+                        <input placeholder="Digite uma sub-tarefa" name="response-user" class="box-user-1" type="text">
+                    </div>
+                    <div class="displaybox-btns-geral">
+                        <input placeholder="Digite uma sub-tarefa para chat-gpt" name="response-user" id="response-user"
+                            class="box-user-2" type="text">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -21,7 +21,6 @@ body{
 }
 
 .wrapper{
-    width: 1300px;
     background: transparent;
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(20px);
@@ -35,6 +34,10 @@ body{
 .wrapper h1{
     margin-bottom: 30px;
     font-weight: 300;
+}
+
+.close{
+  font-size: 50px;
 }
 
 .text-box{

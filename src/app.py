@@ -7,7 +7,6 @@ from routes import configure_routes
 
 app = Flask(__name__)
 # Definições da sessao do usuario através do flask session
-# Ele basicamente cria uma sessao unica pro usuario
 app.config['SESSION_PERMANENT'] = False
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
@@ -21,7 +20,3 @@ configure_routes(app)
 # Reccarega automatico "Quando em ambiente teste"
 if __name__ == '__main__':
     app.run(debug=True)
-
-# Carrega as telas simultaeamente, em vez de rodar uma por uma "Dimuindo
-# o tempo de carregamento"
-# app.run(thread=True)

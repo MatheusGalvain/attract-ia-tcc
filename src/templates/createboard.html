@@ -1,17 +1,12 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Link para página estática ao CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/createboard.css') }}">
-    <title>Attract IA</title>
+{% include "head.html" %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/createboard.css') }}">
 
-</head>
 <body>
     <form action="/createboard" method="POST">
     <div class="wrapper">
+        
         <div class="wrapper-box">
+           
         <!-- Div das coisas a Esquerda -->
         <div class="left">
             <div class="personal-image">
@@ -54,6 +49,7 @@
             </div>
             <button type= "submit" class="btn-create">CRIAR</button>
         </div>
+        <span class="close">&times;</span>
     </div>
 </form>
 </div>

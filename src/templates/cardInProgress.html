@@ -1,0 +1,19 @@
+<div id="modalInProgress{{ card.id }}" class="modal">
+  <div class="modal-content">
+      <span class="close" id="closeModalInProgressBtn{{card.id}}" onclick="closeButtonInProgress('{{card.id}}')">&times;</span>
+      <h2>Título do novo quadro:</h2>
+      <form method="POST" action="/savecard/{{ board.id }}">
+      <div class="display">
+          <label for="cardName">Escolha um nome para o seu novo quadro {{ card.id }}</label>
+              <div class="login-box">
+                  <input  placeholder="Nome" class="user-box" type="text" id="cardName{{card.id}}" name="cardName" required>
+              </div>
+      </div>
+      <div class="button-container">
+          <button class="btn-login" type="button" id="cancelInProgressBtn{{card.id}}" onclick="cancelInProgress('{{card.id}}')">Cancelar</button>
+          <button class="btn-login" type="submit" id="saveBtn{{card.id}}" onclick="submitInProgress('{{card.id}}')">Salvar</button>
+      </div>
+      </form>
+  </div>
+</div>
+

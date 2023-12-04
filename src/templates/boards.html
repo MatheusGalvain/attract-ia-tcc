@@ -1,20 +1,13 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Link para página estática ao CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/boards.css') }}">
-    <script src="https://kit.fontawesome.com/a0954ea3b6.js" crossorigin="anonymous"></script>
-    <title>Attract IA</title>
-</head>
-
+{% include "head.html" %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/boards.css') }}">
+<script src="https://unpkg.com/feather-icons"></script>
+ 
 <body>
     {% include "header.html" %}
     <div class="container ">
         <div class="top-name">
-            <h1>Olá, Matheus!</h1>
+            <h1>Olá, {{ user_name }}!</h1>
             <h2>Continue produzindo de onde parou:</h2>
         </div>
 
@@ -27,7 +20,7 @@
             </a>
 
             {% for board in boards %}
-            <div class="boards">
+            <div onclick="redirectBoard('{{ board.id }}')" class="boards">
                 <div class="card-image">
                     <label class="card-label">
                         <figure class="personal-figure">
@@ -46,5 +39,11 @@
             </a>
         </div>
     </div>
+
+    <script>
+        function redirectBoard(id){
+            window.location.href = "/boards/inside/" + id;
+        };
+    </script>
 </body>
 </html>

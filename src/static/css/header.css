@@ -27,7 +27,7 @@
     }
 
     .imgtopperfil {
-        width: 8vh;
+        width: 7vh;
         border-radius: 50px;
         text-decoration: none;
     }
@@ -36,8 +36,8 @@
         display: flex;
         font-family: Arial;
         justify-content: space-around;
-        background-color: #221d35;
-        box-shadow: 0 0 1rem #A259FF;
+        background-color: #292047;
+        /* box-shadow: 0 0 1rem #A259FF; */
     }
 
     .nav-list {

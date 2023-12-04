@@ -1,0 +1,35 @@
+<div id="modalSubActivite{{ sub_activite.id }}" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeModalSubActiviteBtn{{sub_activite.id}}"
+            onclick="closeButtonSubActivite('{{sub_activite.id}}')">&times;</span>
+        <h2>{{sub_activite.title}}</h2>
+        <form method="POST" action="">
+            <div class="display">
+                <textarea style="width: 100%" placeholder="Digite uma Descrição" cols="30" rows="10">{% if sub_activite.sub_title is not none %}{{ sub_activite.sub_title }}{% endif %}</textarea>
+            </div>
+            <div class="button-container">
+                <button class="btn-login" type="submit">Salvar</button>
+                <button class="btn-login" type="submit" id="saveBtn{{sub_activite.id}}"
+                    onclick="deleteSubActivite('{{sub_activite.id}}', '{{board.id}}')">Deletar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function deleteSubActivite(sub_card_id, board_id) {
+    $.ajax({
+            url: '/delete-sub-activite/' + sub_card_id + '/' + board_id,
+            type: 'POST',
+            contentType: 'application/json',
+            success: function (response) {
+                console.log(response);
+            },
+            error: function (error) {
+                console.error('Erro ao chamar a rota do Flask:', error);
+                // Em caso de erro, remova o indicador de carregamento
+                loadingGif.style.display = 'none';
+            }
+        });
+    }
+</script>

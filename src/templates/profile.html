@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Link para página estática ao CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
-    <title>Attract IA</title>
-</head>
+{% include "head.html" %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+ 
 
 <body>
     <!-- Aqui fica o header -->
